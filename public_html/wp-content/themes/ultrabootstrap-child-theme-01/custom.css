@@ -151,7 +151,7 @@ span.cpf-img-on-cart {
 }
 
 .img-slider h4 {
-    padding: 3px 30px 45px 30px;
+    padding: 7px 30px 45px 30px;
 }
 
 .logged-in header .navbar-default {
@@ -205,10 +205,6 @@ header .navbar-default .navbar-nav li a {
 	padding-bottom: 22px;
 }
 
-.navbar-fixed-top{
-  padding-bottom: 4px;
-}
-
 button.single_add_to_cart_button.button.alt.disabled {
     background: transparent;
     color: #000;
@@ -251,31 +247,31 @@ div#customer_billing_details {
 
 @media screen and (max-width: 1210px) {
 	.tm-extra-product-options .tmcp-field-wrap label {
-		/*min-width: 45%;*/
+		min-width: 45%;
 	}
 }
 
 @media screen and (max-width: 1000px) {
 	.tm-extra-product-options .tmcp-field-wrap label {
-		/*min-width: 70%;*/
+		min-width: 70%;
 	}
 }
 
 @media screen and (max-width: 768px) {
 	.tm-extra-product-options .tmcp-field-wrap label {
-		/*min-width: 45%;*/
+		min-width: 45%;
 	}
 }
 
 @media screen and (max-width: 630px) {
 	.tm-extra-product-options .tmcp-field-wrap label {
-		/*min-width: 60%;*/
+		min-width: 60%;
 	}
 }
 
 @media screen and (max-width: 550px) {
 	.tm-extra-product-options .tmcp-field-wrap label {
-		/*min-width: 80%;*/
+		min-width: 80%;
 	}
 }
 

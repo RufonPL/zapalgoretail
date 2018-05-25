@@ -12,6 +12,10 @@
 * Also if the parent theme supports pluggable functions you can use function_exists( 'put_the_function_name_here' ) checks.
 */
 
+/**
+ * Loads parent and child themes' style.css
+ */
+ 
 add_image_size( 'cross-sell-thumb', 1920, 1280, true);
 
 add_filter( 'woocommerce_checkout_fields' , 'custom_override_checkout_fields', 99 );
@@ -24,35 +28,11 @@ function custom_override_checkout_fields( $fields ) {
     return $fields;
 }
 
-function my_duplicate_post_link($actions, $post) {
-
-    // The following checks WHERE we should run if not products just return
-    if ( $post->post_type != 'product' ) {
-        return $actions;
-    }
-
-    $product = get_product( $post->ID );
-    unset($actions['duplicate']);
-    return $actions;
+function sv_unrequire_wc_phone_field( $fields ) {
+    $fields['billing_state']['required'] = false;
+    return $fields;
 }
-
-// Notice priority changed from default 10 to 15(anything greater than 10)
-// Priority defines WHEN we should run
-add_filter('post_row_actions', 'my_duplicate_post_link', 15, 2);
-add_filter('page_row_actions', 'my_duplicate_post_link', 15, 2);
-
-add_action('init','wpse_227130_hook_properly');
-
-function wpse_227130_hook_properly() {
-    add_filter('post_row_actions', 'my_duplicate_post_link', 10, 2);
-    add_filter('page_row_actions', 'my_duplicate_post_link', 10, 2);
-}
-
-
-
-/**
- * Loads parent and child themes' style.css
- */
+add_filter( 'woocommerce_billing_fields', 'sv_unrequire_wc_phone_field' );
  
 function orbisius_ctc_ultrabootstrap_child_theme_enqueue_styles() {
     $parent_style = 'orbisius_ctc_ultrabootstrap_parent_style';
@@ -98,18 +78,15 @@ if( function_exists('acf_add_options_page') ) {
 		
 //		setcookie($cookie_name, $cookie_value, time() + (86400 * 30 * 12), '/');
 		setcookie($cookie_name, $cookie_value, time() + (86400 * 30 * 12), '/');
+//		setcookie($cookie_name, $cookie_value, time() + (86400 * 30 * 12), '/retailer/');
 		
 		//additional cookies used by WooCommerce
 		setcookie('aelia_billing_country', $cookie_value, time() + (86400 * 30 * 12), '/');
 		setcookie('aelia_customer_country', $cookie_value, time() + (86400 * 30 * 12), '/');
+//		setcookie('aelia_billing_country', $cookie_value, time() + (86400 * 30 * 12), '/retailer/');
+//		setcookie('aelia_customer_country', $cookie_value, time() + (86400 * 30 * 12), '/retailer/');
 		
-		
-/*		unset($_COOKIE['woocommerce_cart_hash']);
-		unset($_COOKIE['woocommerce_items_in_cart']);
-		unset($_COOKIE['PHPSESSID']);
-		setcookie('woocommerce_cart_hash', NULL, time() + (86400 * 30 * 12), '/zapalgo/');
-		setcookie('woocommerce_items_in_cart', NULL, time() + (86400 * 30 * 12), '/zapalgo/');
-		setcookie('PHPSESSID', NULL, time() + (86400 * 30 * 12), '/zapalgo/');*/	
+		setcookie('retailer_cookie', 'I am a cookie now', time() + (86400 * 30 * 12), '/');		
 		
 		global $woocommerce;
 		$woocommerce->customer->set_country( $cookie_value );
@@ -120,8 +97,7 @@ if( isset( $_GET['rtc'] ) && absint( $_GET['rtc'] ) == 1 ) { // redirect to chec
 				wp_safe_redirect( get_permalink( get_option( 'woocommerce_checkout_page_id' ) ).'?alg_currency='.sanitize_text_field($_GET['alg_currency']).'&rfc='.get_the_ID() ); exit();
 			}else {
  */
-
-		wp_safe_redirect( get_permalink().'?alg_currency='.sanitize_text_field($_GET['alg_currency']) ); exit();
+			wp_safe_redirect( get_permalink().'?alg_currency='.sanitize_text_field($_GET['alg_currency']) ); exit();
 			
 		}
 	}
@@ -169,10 +145,7 @@ function woo_countries_list() {
 			'default'     => customer_get_default_country() ? customer_get_default_country() : $base_country
 		)
 	);
-	echo '<a class="btn btn-primary" id="set_cdc">Save</a>';
-	echo '<div class="bottom-title"><p>Shipping costs and taxes vary by country of destination. You may change the country anytime later by clicking COUNTRY button in the upper left corner of our site, but doing that may erase all your cart history in our shop.</p>';
-	echo '<p>For all European Union countries prices include all taxes and fees. All other countries view prices excluding taxes and fees, which are in this instance not applied. However, if you live outside EU, some taxes and fees may be applied later on arrival in your country of destination.</p>';
-	echo '<p>For some countries our online sale is not available. In that case, please contact your nearest retailer. You may find our retailers list in the CONTACT section on our site.</p></div></div>';
+	echo '<a class="btn btn-primary" id="set_cdc">Save</a></div>';
 }
 
 function localize_scripts() {
@@ -581,7 +554,8 @@ function get_product_sale_price($product) {
 
  add_filter('jpeg_quality', function($arg){return 100;});
 
- /*** CURRENCY ***/
+
+  /*** CURRENCY ***/
 // adds additional term at third checkout step for users from Shipping Zone 4 and Rest of World.
 function get_checkout_term($type) {
 	$zones = WC_Shipping_Zones::get_zones();
@@ -626,49 +600,6 @@ function get_checkout_term($type) {
 }
 
 
-/*** Product Page ***/
-// checks a specific Shipping Zone for customer counter, and disable sale capability
-function check_if_customer_can_buy() {
-	$zones = WC_Shipping_Zones::get_zones();
-	
-	echo '<div style="display: none;">';
-//		print_r($zones);
-	echo '</div>';	
-	
-	$can_buy_flag = false;
-	
-	// return term about no delivery in no delivery zone
-//	echo "Kraje należące do sprawdzanej strefy: ";
-			for ($locations = 0; $locations < count($zones[9]['zone_locations']); $locations++){
-				
-				$loc = $zones[9]['zone_locations'][$locations]->code;
-//				echo "$loc ";
-				
-				if (($zones[9]['zone_locations'][$locations]->code) == ($_COOKIE['aelia_billing_country'])){
-					$delivery_costs_flag = true;
-				}
-			}
-
-		if ($delivery_costs_flag == true) {
-			echo '<p id="delivery-text">Online sale in your country is unavailable. Please contact your nearest retailer. You may find our retailers list in the <a href="'.get_page_link(162).'">CONTACT section on our site</a>.</p>';
-			?>
-			<script>
-				function hideButtonsPlease() {
-					hideBtn1 = document.getElementsByClassName("quantity");
-					length = hideBtn1.length;
-					hideBtn2 = document.getElementsByClassName("single_add_to_cart_button");
-/*					hideBtn3 = document.getElementsByClassName("req-text");*/
-					hideBtn1[length-1].style.display = ("none");
-					hideBtn2[0].style.display = ("none");
-/*					hideBtn3[0].style.display = ("none");*/
-				}
-				setTimeout(hideButtonsPlease, 1000);
-			</script> <?php
-		} 
-		
-	
-}
-
 
 function change_country_currencies($country_currencies) {
 // Change normal currency to defined
@@ -689,7 +620,7 @@ $country_currencies['RU'] = 'EUR';
 $country_currencies['SM'] = 'EUR';
 $country_currencies['RS'] = 'EUR';
 $country_currencies['CH'] = 'EUR';
-$country_currencies['GB'] = 'GBP';
+$country_currencies['GB'] = 'EUR';
 $country_currencies['SE'] = 'EUR';
 $country_currencies['TR'] = 'EUR';
 $country_currencies['VA'] = 'EUR';
@@ -701,9 +632,8 @@ $country_currencies['RO'] = 'EUR';
 $country_currencies['DK'] = 'EUR';
 $country_currencies['HR'] = 'EUR';
 $country_currencies['BG'] = 'EUR';
-$country_currencies['UK'] = '';
-
-
+$country_currencies['US'] = 'USD';
+$country_currencies['PL'] = 'EUR';
 
 
 return $country_currencies;
@@ -712,48 +642,10 @@ return $country_currencies;
 add_filter('wc_aelia_currencyswitcher_country_currencies', 'change_country_currencies', 10, 1);
 
 
-// zrobić funcję script biorącą - .cart-collaterals, a z niej .calculated_shipping
-function only_one_shipping_on_cart() {
-
-?>
-<script>
-let cart = document.getElementsByClassName("cart-collaterals");
-if (cart.length > 1) {
-	for (i = 2; i < cart.length; i++) {
-		cart[i].innerHTML = "";
-	}
-}
-</script>
-<?php 
-};
-
-function change_key( $array, $old_key, $new_key ) {
-
-    if( ! array_key_exists( $old_key, $array ) )
-        return $array;
-
-    $keys = array_keys( $array );
-    $keys[ array_search( $old_key, $keys ) ] = $new_key;
-
-    return array_combine( $keys, $array );
-}
-
-add_filter( 'woocommerce_checkout_fields' , 'my_override_checkout_fields' );
-function my_override_checkout_fields( $fields ){
-   $fields['shipping'] = change_key( $fields['shipping'], 'shipping_address', 'shipping_address_1' );
-  $fields['billing']['billing_state']['required'] = false;
-  $fields['shipping']['shipping_state']['required'] = false;
-  return $fields;
-}
-
-
-
 function action_woocommerce_checkout_update_order_review($array, $int)
 {
     WC()->cart->calculate_shipping();
     return;
 }
 add_action('woocommerce_checkout_update_order_review', 'action_woocommerce_checkout_update_order_review', 10, 2);
-
-
 

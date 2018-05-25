@@ -443,7 +443,7 @@
 
 .radio_image_label, .checkbox_image_label {
     display: block;
-    text-align: center;
+    text-align: left;
     float: left;
 /*    padding: 1em 40px;*/
     line-height: 2.3;
@@ -498,11 +498,13 @@ span.tm-epo-field-label.tm-section-label.tm-toggle:after {
 }*/
 
 @media (min-width: 769px) {
-.tm-extra-product-options ul.tmcp-ul-wrap li.tmcp-field-wrap input.use_images + label {
+.tm-extra-product-options ul.tmcp-ul-wrap li.tmcp-field-wrap input.use_images/* + label*/ {
 		display: table;
 		padding: 0 !important;
+/*		padding-left: 30%!important;*/
 		max-width: 100%;
-		width: 46%;
+/*		width: 46%;*/
+		width: 100%;
 		border: 0 solid;
 		position: relative;
 		line-height: 0;
@@ -514,7 +516,7 @@ span.tm-epo-field-label.tm-section-label.tm-toggle:after {
 }
 
 @media (max-width: 768px) {
-	.tm-extra-product-options ul.tmcp-ul-wrap li.tmcp-field-wrap input.use_images + label {
+	.tm-extra-product-options ul.tmcp-ul-wrap li.tmcp-field-wrap input.use_images/* + label*/ {
 		display: table;
 		padding: 0 !important;
 		max-width: 100%;

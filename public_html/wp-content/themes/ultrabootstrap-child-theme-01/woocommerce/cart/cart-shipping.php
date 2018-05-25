@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<th><?php //echo wp_kses_post( $package_name ); ?></th>
 	<td data-title="<?php echo esc_attr( $package_name ); ?>">
 		<?php if ( 1 < count( $available_methods ) ) : ?>
-			<ul id="shipping_method" <?php // if (get_the_ID() == 5) {echo 'class="hidden"';} ?>>
+			<ul id="shipping_method">
 				<?php foreach ( $available_methods as $method ) : ?>
 					<li>
 						<?php
@@ -45,7 +45,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 				}
 			?>
 			
-			
 		<?php elseif ( 1 === count( $available_methods ) ) :  ?>
 			<?php
 				$method = current( $available_methods );
@@ -53,6 +52,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				do_action( 'woocommerce_after_shipping_rate', $method, $index );
 				// if someone has only personal collection - ask for price information will show up.
 				echo '// Ask for shipping price -> <a href="mailto:zapalgo@gmail.com">send mail here</a>.';
+				echo '<br>We are sorry, but shipping cost for country you have selected is currently unavailable. To receive information about shipping cost please check options "Courier shipping - request price" and "Direct bank transfer" and press “COMPLETE ORDER” button. The shipping cost will be emailed to you and your order will be processed further only after your acceptance.';
 			?>
 		<?php elseif ( ! WC()->customer->has_calculated_shipping() ) : ?>
 			<?php echo wpautop( __( 'Shipping costs will be calculated once you have provided your address.', 'woocommerce' ) ); ?>

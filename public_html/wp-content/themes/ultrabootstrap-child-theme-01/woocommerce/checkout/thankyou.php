@@ -35,17 +35,34 @@ if ( $order ) : ?>
 
 	<?php else : ?>
 
-		<p class="woocommerce-thankyou-order-received"><?php echo apply_filters( 'woocommerce_thankyou_order_received_text', __( "Thank you for your order! <br /> <br />
-		Please check your mailbox for order confirmation and payment details. If you haven't received our email in 15 minutes, please check your spam folder. <br /> <br />
-		Please make your payment directly to our bank account. Use your order number as the payment title/reference. Your order will be processed and shipped only after we have received your full payment and all the funds have cleared on our bank account.  <br /> <br />
-		You will receive a message once your payment have cleared and your package is ready for shipping. <br /> <br />
-		Have a great day! <br /> <br />
-		Zapalgo Team" ), $order ); ?></p>
+		<p class="woocommerce-thankyou-order-received"><?php echo apply_filters( 'woocommerce_thankyou_order_received_text', __( 'Thank you. Your order has been received.', 'woocommerce' ), $order ); ?></p>
 
+		<ul class="woocommerce-thankyou-order-details order_details">
+			<li class="order">
+				<?php _e( 'Order Number:', 'woocommerce' ); ?>
+				<strong><?php echo $order->get_order_number(); ?></strong>
+			</li>
+			<li class="date">
+				<?php _e( 'Date:', 'woocommerce' ); ?>
+				<strong><?php echo date_i18n( get_option( 'date_format' ), strtotime( $order->order_date ) ); ?></strong>
+			</li>
+			<li class="total">
+				<?php _e( 'Total:', 'woocommerce' ); ?>
+				<strong><?php echo $order->get_formatted_order_total(); ?></strong>
+			</li>
+			<?php if ( $order->payment_method_title ) : ?>
+			<li class="method">
+				<?php _e( 'Payment Method:', 'woocommerce' ); ?>
+				<strong><?php echo $order->payment_method_title; ?></strong>
+			</li>
+			<?php endif; ?>
+		</ul>
+		<div class="clear"></div>
 
 	<?php endif; ?>
 
-
+	<?php do_action( 'woocommerce_thankyou_' . $order->payment_method, $order->id ); ?>
+	<?php do_action( 'woocommerce_thankyou', $order->id ); ?>
 
 <?php else : ?>
 

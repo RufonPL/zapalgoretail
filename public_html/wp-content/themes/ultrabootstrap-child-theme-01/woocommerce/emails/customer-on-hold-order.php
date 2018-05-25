@@ -25,13 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 
-<p><?php _e( "Please make your payment directly to our bank account. 
-Use your order number as the payment title/reference. 
-Your order will be processed and shipped only after we have received your full payment and all the funds have cleared on our bank account. 
-You will receive a message once your payment have cleared and your package is ready for shipping.<br /><br />
-Have a great day!<br /><br />
-Zapalgo Team<br /><br />
-<br /><br />" ); ?></p>
+<p><?php _e( "Your order is on-hold until we confirm payment has been received. Your order details are shown below for your reference:", 'woocommerce' ); ?></p>
 
 <?php
 

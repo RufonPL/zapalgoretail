@@ -125,10 +125,10 @@ get_header(); ?>
 
 
 <section class="page-section">
-	<div class="custom-container img-slider guidebox-content">
+	<div class="custom-container img-slider">
 		<div class="row">
 			<div class="col-md-12">
-				<?php the_field('text_guidebox'); ?>
+				<h5><?php the_field('text_guidebox'); ?></h5>
 			</div>
 		</div>
 	</div>

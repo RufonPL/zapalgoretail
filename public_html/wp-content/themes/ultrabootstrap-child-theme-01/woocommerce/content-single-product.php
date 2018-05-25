@@ -134,11 +134,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</div>
 	</div>
 </section>
-<section class="page-section productGuidebox">
+<section class="page-section">
 	<div class="img-slider">
 		<div class="row">
 			<div class="col-md-12">
-				<?php the_field('text_guidebox'); ?>
+				<h5><?php the_field('text_guidebox'); ?></h5>
 			</div>
 		</div>
 	</div>
@@ -167,7 +167,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	    $regular_description = __('Netto') . ' ' . $regular_description;
     }
 ?>
-<?php check_if_customer_can_buy(); ?>
+
 <div class="custom-prices js-custom-prices" data-price-discount="<?php echo $discount; ?>">
     <div class="custom-price-sale js-custom-price-sale"><?php echo wc_price($sale_price); ?></div>
     <?php
@@ -208,7 +208,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	    <?php if( have_rows('files') ):
 	        while ( have_rows('files') ) : the_row(); ?>
 		        <div class="file">
-			        <a href="<?php the_sub_field('file'); ?>"><img src="https://zapalgo.com/wp-content/uploads/2017/03/download.png" alt=""><span class="txt"><?php the_sub_field('name_file'); ?></span></a>
+			        <a href="<?php the_sub_field('file'); ?>"><img src="http://www.e-conex.pl/zapalgo/wp-content/uploads/2017/03/download.png" alt=""><span class="txt"><?php the_sub_field('name_file'); ?></span></a>
 			    </div>
 	        <?php endwhile;
 	    endif; ?>	
@@ -223,37 +223,37 @@ $crosssell_ids = get_post_meta( get_the_ID(), '_crosssell_ids' );
 $crosssell_ids=$crosssell_ids[0]; 
 
 ?>
-<div class="title-page seeAlso">
+<div class="title-page">
 	<div class="h1">You may also like</div>
 </div>
-  <div class="seeAlsoContainer">
-    <div class="row">
-        <?php
-        if(count($crosssell_ids)>0){
-        $args = array( 'post_type' => 'product', 'posts_per_page' => 50, 'post__in' => $crosssell_ids );
-        $loop = new WP_Query( $args );
-        while ( $loop->have_posts() ) : $loop->the_post();
-        ?>
+<div class="row">
+	<?php
+	if(count($crosssell_ids)>0){
+	$args = array( 'post_type' => 'product', 'posts_per_page' => 50, 'post__in' => $crosssell_ids );
+	$loop = new WP_Query( $args );
+	while ( $loop->have_posts() ) : $loop->the_post();
+	?>
+		<div id="qweqwe" style="display: none">
+		<?php //print_r($loop); ?>
+		</div>
+
+		<div class="col-md-3 col-sm-6 img-rel">
+			<a href='<?php the_permalink(); ?>'>
+			
+			<?php the_post_thumbnail( 'cross-sell-thumb' ); ?>
+			<?php // the_post_thumbnail( 'thumbnail' ); ?>
+			<div class="font-style"><?php the_title(); ?></div>
+			
+
+			</a>
+		</div>
 
 
-            <div class="col-md-3 col-sm-6 img-rel">
-                <a href='<?php the_permalink(); ?>'>
-
-                <?php // the_post_thumbnail( 'thumbnail' ); ?>
-                <?php the_post_thumbnail( 'cross-sell-thumb' ); ?>
-                <div class="font-style"><?php the_title(); ?></div>
-
-
-                </a>
-            </div>
-
-
-        <?php
-        endwhile;
-        }
-        ?>
-    </div>
-  </div>
+	<?php
+	endwhile;
+	}
+	?>
+</div>
 <div style="clear: both;"></div>
 	<meta itemprop="url" content="<?php the_permalink(); ?>" />
 

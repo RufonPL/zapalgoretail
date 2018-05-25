@@ -25,10 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<?php do_action( 'woocommerce_before_cart_totals' ); ?>
 
-<!--	<h2><?php //_e( 'Cart Totals', 'woocommerce' ); ?></h2>-->
-		<div class="page-title">
-			<h1>Cart Totals</h1>
-		</div>
+	<h2>Cart Totals</h2>
 
 	<table cellspacing="0" class="shop_table shop_table_responsive">
 

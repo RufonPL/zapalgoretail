@@ -25,13 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 
-<p><?php _e( "Please make your payment directly to our bank account. Use your order number as the payment title/reference. Your order will be processed and shipped only after we have received your full payment and all the funds have cleared on our bank account. You will receive a message once your payment have cleared and your package is ready for shipping.
-
-Have a great day!
-
-Zapalgo Team
-
-Order details:"); ?></p>
+<p><?php _e( "Your order has been received and is now being processed. Your order details are shown below for your reference:", 'woocommerce' ); ?></p>
 
 <?php
 

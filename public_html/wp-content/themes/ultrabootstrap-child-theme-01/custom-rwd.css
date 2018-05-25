@@ -16,9 +16,6 @@
   .col-md-3.img-rel .font-style{
     padding-bottom: 10px;
   }
-  footer.mobile{
-    display: none;
-  }
 }
 
 @media screen and (max-width: 768px) {
@@ -28,9 +25,6 @@
   .menu-desktop {
     display: none;
   }
-  footer.desktop{
-    display: none;
-  }
 }
 
 @media screen and (width: 768px) {
@@ -38,10 +32,7 @@
     display: block;
   }
   .navbar-collapse.collapse {
-    display: none !important;
-  }
-  .navbar-collapse.collapse.in {
-    display: block !important;
+    /*		display: none;*/
   }
 
   .container-tablet {
@@ -63,9 +54,6 @@
   button.single_add_to_cart_button.button.alt {
     width: 40%!important;
     margin: 0!important;
-  }
-  .custom-container{
-    width: 100%;
   }
 }
 
@@ -97,7 +85,6 @@
   .custom-container {
     padding-left: 0;
     padding-right: 0;
-    overflow: hidden;
   }
 
   body.blog .custom-container {
@@ -380,6 +367,9 @@
     right: 10px;
   }
 
+  .zdj1{
+    padding-right: 15px;
+  }
   /*** --END-- PRODUCT PAGE **/
 
   footer	{
@@ -388,7 +378,7 @@
 }
 
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 991px) {
   .single-product .page-section,
   .single-product .custom-button-shop,
   .single-product .content-files,
@@ -407,7 +397,7 @@
 
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 768px) {
   .slick-dots {
     display: none !important;
   }
@@ -417,22 +407,6 @@
 }
 
 @media screen and (max-width: 768px) {
-  .page-template-press #images .col-md-6{
-    padding: 0;
-  }
-  .products.row .col-sm-6.product{
-    padding: 0;
-  }
-}
-
-@media screen and (width: 768px) {
-  .products.row .col-sm-6.product{
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-}
-
-@media screen and (max-width: 1024px) {
   #myCarousel .carousel-indicators{
     width: 100%;
     left: 0;
@@ -445,7 +419,9 @@
   #myCarousel .carousel-indicators li.active{
     opacity: 1;
   }
-
+  .products.row .col-sm-6.product{
+    padding: 0;
+  }
   .product .check .sub,.page-template-guidebox .check .sub{ 
     display: none;
   }
@@ -454,7 +430,9 @@
     max-width: calc(100% - 57px);
   }
 
-
+  .page-template-press #images .col-md-6{
+    padding: 0;
+  }
   .page-template-press #images .retailer img{
     max-height: none;
   }
@@ -517,23 +495,23 @@
   #checkout-wrapper table.shop_table .pt-qty{
     padding-left: 95px;
   }
-
+  
   .woocommerce-checkout .checkout_billing .wc-terms-and-conditions .input-checkbox{
     margin-right: 10px;
-
+    
   }
-
+  
   .woocommerce-checkout .checkout_billing .wc-terms-and-conditions{
     margin-bottom: 30px;
   }
-
+  
   .wc-terms-and-conditions{
     font-size: 1em;
   }
   #ship-to-different-address .checkbox{
     padding-left: 27px;
   }
-
+  
   body.withVideo .custom-container .col-sm-12{
     padding: 0;
   }
@@ -546,172 +524,4 @@
     padding: 6px 2px;
   }
 
-  .selected-param{
-    display: inline-block;
-    float: right;
-    margin: 0;
-    right: auto;
-    padding: 0;
-    min-width: 0;
-  }
-  span.tm-epo-field-label.tm-section-label.tm-toggle:after{
-    display: none;
-  }
-  #customer_billing_details #billing_state_field{
-    width: 100%;
-  }
-  #customer_billing_details .form-row.form-row.col-sm-6.address-field{
-    clear:both;
-  }
-  .contact-retailers .col-md-6{
-    clear:both;
-  }
-  @media (min-width: 768px)
-  {
-    .container {
-      width: auto;
-    }
-  }
-
-}
-
-
-@media (max-width: 768px)
-{
-  #newsletterPopup .right,#newsletterPopup .left{
-    width: 293px;
-  }
-
-
-  #newsletterPopup {
-    width: 293px;
-  }
-
-  .globeImg{
-    display: none;
-  }
-
-  #newsletterPopup .left{
-    height: auto;
-    padding: 20px 30px;
-  }
-
-  #newsletterPopup .right{
-    padding: 18px;
-  }
-
-  #newsletterPopup .left .weShip, #newsletterPopup .left .worldwide{
-    font-size: 18px;
-    display: inline-block;
-    margin: 0;
-    font-weight: 400;
-  }
-  
-  #newsletterPopup .shipPartners img:last-child{
-    margin-right: 0;
-  }
-
-  #newsletterPopup h3{
-    font-size: 19px;
-    margin-bottom: 11px;
-    margin-top: 15px;
-  }
-
-  #newsletterPopup .right p{
-    margin-bottom: 2px;
-  }
-  #newsletterPopup .right p.big{
-    font-size: 33px;
-  }
-  #newsletterPopup .right .email{
-    padding: 10px;
-  }
-
-  #newsletterPopup .right .submit{
-    font-size: 18px;
-    line-height: 25px;
-  }
-
-  #newsletterPopup .left .paypal{
-    width: 150px;
-    margin-bottom: 5px;
-  }
-
-
-  footer{
-    padding-top: 45px;
-    text-align: center;
-  }
-
-  .title-footer.newsletter{
-    margin-bottom: 8px !important;
-  }
-
-  .tnp-subscription-minimal input.tnp-email{
-    width: 75% !important;
-    line-height: 18px !important;
-    color: #999999 !important;
-    font-size: 13px !important;
-  }
-
-  .tnp-subscription-minimal input.tnp-submit{
-    width: 75% !important;
-    display: inline-block !important;
-    font-size: 14px !important;
-    padding: 5px 0 !important;
-  }
-
-  .newsletterCol{
-    padding-bottom: 40px;
-    border-bottom: 1px solid #c1c1c1;
-  }
-  .contactUsCol{
-    padding-top: 47px;
-    padding-bottom: 38px;
-    border-bottom: 1px solid #c1c1c1;
-  }
-  .footer-info a p{
-    margin-bottom: 8px;
-  }
-  
-  .socialCol{
-    padding-top: 47px;
-    padding-bottom: 38px;
-  }
-  
-  .socialCol .paypalImg{
-    width: 200px;
-    margin-bottom: 18px;
-  }
-  
-  footer .copy{
-    font-size: 11px;
-    margin-top: 30px;
-  }
-  
-  .img-slider h4{
-    font-size: 11px;
-    color: #000;
-  }
-  
-  .homeTiles a.col-md-6{
-    padding-left: 0;
-    padding-right: 0;
-  }
-  
-  .slick-slider .slick-arrow{
-    display: none !important;
-  }
-  
-  .driver .row, .homeTiles .row{
-    margin: 0;
-  }
-  
-  .driver .col-md-12, .homeTiles .col-md-12 {
-    padding: 0;
-  }
-  
-  .seeAlsoContainer{
-    overflow: hidden;
-  }
 }

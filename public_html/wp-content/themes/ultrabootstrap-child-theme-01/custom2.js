@@ -1,3 +1,4 @@
+
 $(document).ready(function() {
 	if ( $('.tmcp-field-wrap').hasClass("tc-active") ) {
 		console.log('asffas');

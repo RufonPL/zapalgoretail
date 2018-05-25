@@ -63,7 +63,7 @@ if( $.trim( rfc ) != '' ) {
 							current_currency = currency_switcher.find('a').first().attr('id'),
 							currency = _set_currency(value);
 
-						if(current_currency) {
+						if (current_currency) {
 							if( current_currency.indexOf(currency) == -1 ) {
 								url = window.location.origin + window.location.pathname + '?&alg_currency=' + currency + '&customer_set_default_country=' + value;
 
@@ -195,48 +195,47 @@ if( $.trim( rfc ) != '' ) {
 			});
 		},
 		block_shipping_validation: function() {
-			console.log('lol')
-			//var $shippingCheckbox = $('#ship-to-different-address-checkbox');
-            //
-			//if ($shippingCheckbox.length == 0) {
-			//	return;
-			//}
-            //
-			//var $shippingAddress = $('.shipping_address');
-            //
-			//function updateValidation(state) {
-			//	if (!state) {
-			//		$shippingAddress.find('.form-row').each(function(){
-			//			var classes = $(this).attr('class').split(/\s+/);
-			//			var validationClasses = [];
-            //
-			//			for(var i in classes) {
-			//				if (classes[i].startsWith('validate-')) {
-			//					validationClasses.push(classes[i]);
-			//					$(this).removeClass(classes[i]);
-			//				}
-			//			}
-            //
-			//			if (validationClasses.length > 0) {
-             //               $(this).attr('data-blocked-validation', validationClasses.join(' '));
-             //           }
-			//			$(this).removeClass('woocommerce-invalid woocommerce-invalid-required-field');
-			//		});
-			//	} else {
-			//		$shippingAddress.find('[data-blocked-validation]').each(function(){
-			//			$(this).addClass($(this).attr('data-blocked-validation'));
-			//			$(this).attr('data-blocked-validation', '');
-			//		});
-			//	}
-			//}
-            //
-			//if (!$shippingCheckbox.is(':checked')) {
-             //   updateValidation(false);
-			//}
-            //
-			//$shippingCheckbox.change(function(){
-			//	updateValidation($shippingCheckbox.is(':checked'));
-			//});
+			var $shippingCheckbox = $('#ship-to-different-address-checkbox');
+
+			if ($shippingCheckbox.length == 0) {
+				return;
+			}
+
+			var $shippingAddress = $('.shipping_address');
+
+			function updateValidation(state) {
+				if (!state) {
+					$shippingAddress.find('.form-row').each(function(){
+						var classes = $(this).attr('class').split(/\s+/);
+						var validationClasses = [];
+
+						for(var i in classes) {
+							if (classes[i].startsWith('validate-')) {
+								validationClasses.push(classes[i]);
+								$(this).removeClass(classes[i]);
+							}
+						}
+
+						if (validationClasses.length > 0) {
+                            $(this).attr('data-blocked-validation', validationClasses.join(' '));
+                        }
+						$(this).removeClass('woocommerce-invalid woocommerce-invalid-required-field');
+					});
+				} else {
+					$shippingAddress.find('[data-blocked-validation]').each(function(){
+						$(this).addClass($(this).attr('data-blocked-validation'));
+						$(this).attr('data-blocked-validation', '');
+					});
+				}
+			}
+
+			if (!$shippingCheckbox.is(':checked')) {
+                updateValidation(false);
+			}
+
+			$shippingCheckbox.change(function(){
+				updateValidation($shippingCheckbox.is(':checked'));
+			});
 		},
 		clear_terms_error: function(){
 			$('#terms').change(function(){
@@ -262,94 +261,6 @@ if( $.trim( rfc ) != '' ) {
   if(window.location.toString().match('_video')){
     $('body').addClass('withVideo');
   }
-  $('#timeline-2').click(function(){
-    if($('#terms').length && !$('#terms').is(':checked')){
-      $('#timeline-1').click();
-    }
-  });
 })(jQuery, window, document);
 
 
-$(document).ready(function() {
-	var checkoutShipping = $('#shipping_method_0_free_shipping21');
-	if(checkoutShipping.length > 0){
-		if (checkoutShipping[0].value == 'flat_rate:2') {
-			checkoutShipping[0].value = 'flat_rate:1';
-			jQuery(document.body).trigger("update_checkout");
-		}
-	}
-	
-});
-
-// Cookie set from session to timeout
-
-function getCookieZapalgo(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for(var i = 0; i <ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
-
-function setCookieZapalgo(cname, cvalue, exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    var expires = "expires="+ d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
-function deleteCookieZapalgo( name ) {
-  document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-}
-
-setInterval(function(){
-	var cookie_billing_country = getCookieZapalgo("aelia_billing_country");
-	deleteCookieZapalgo("aelia_billing_country");
-	setCookieZapalgo("aelia_billing_country", cookie_billing_country, 14);
-
-	var cookie_selected_currency = getCookieZapalgo("aelia_cs_selected_currency");
-	deleteCookieZapalgo("aelia_cs_selected_currency");
-	setCookieZapalgo("aelia_cs_selected_currency", cookie_selected_currency, 14);
-
-	var cookie_customer_country = getCookieZapalgo("aelia_customer_country");
-	deleteCookieZapalgo("aelia_customer_country");
-	setCookieZapalgo("aelia_customer_country", cookie_customer_country, 14);
-
-	var cookie_customer_state = getCookieZapalgo("aelia_customer_state");
-	deleteCookieZapalgo("aelia_customer_state");
-	setCookieZapalgo("aelia_customer_state", cookie_customer_state, 14);
-	
-}, 500);
-
-$(document).ready(function () {
-  var modal = document.getElementById('popupWrapper');
-  window.onclick = function (event) {
-    if (event.target == modal) {
-      $('#popupWrapper').hide();
-    }
-  }
-  if ($('body').hasClass('woocommerce')) {
-    var popupDisable = parseInt(getCookieZapalgo("popupDisable"));
-    
-    if(popupDisable !== 1){
-      $('#popupWrapper').show();
-    }
-    
-  }
-
-  $('#dontShowPopupAgain').change(function () {
-    if ($(this).is(':checked')) {
-      setCookieZapalgo("popupDisable", 1, 30);
-    }else{
-      setCookieZapalgo("popupDisable", 0, 30);
-    }
-  });
-});

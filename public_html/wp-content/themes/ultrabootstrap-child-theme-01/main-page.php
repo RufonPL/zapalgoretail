@@ -5,9 +5,7 @@
  *
  * @package ultrabootstrap
  */
-get_header();
-$urlPrefix = '';
-?>		
+get_header(); ?>		
 
 <empty-space></empty-space>
 
@@ -30,98 +28,6 @@ $urlPrefix = '';
 		</div>
 	</div>
 </section>
-
-
-<section class="page-section">
-
-  <?php
-  $shopByCategoryItems = array(
-      array(
-          'name' => 'Table lamps collection',
-          'link' => '/product-category/designer-table-lamps/'
-      ),
-      array(
-          'name' => 'Floor lamps collection',
-          'link' => '/product-category/designer-floor-lamps/'
-      ),
-      array(
-          'name' => 'Wall lamps collection',
-          'link' => '/product-category/designer-wall-lamps-sconces/'
-      ),
-      array(
-          'name' => 'Ceiling lamps collection',
-          'link' => '/product-category/designer-ceiling-lamps/'
-      ),
-      array(
-          'name' => 'Furniture collection',
-          'link' => '/product-category/designer-furniture/'
-      ),
-      array(
-          'name' => 'Accessories collection',
-          'link' => '/product-category/designer-accessories/'
-      ),
-      
-  );
-
-  ?>
-  <div class="title-page">
-    <h1>Shop by category</h1>
-  </div>
-  <div class="custom-container homeTiles">	
-    <div class="row">
-      <?php foreach($shopByCategoryItems as $index => $item):?>
-      <a href="<?php echo $urlPrefix.$item['link']?>" class="col-md-6">
-        <img src="<?php echo get_template_directory_uri(); ?>/img/cat<?php echo $index+1?>.jpg"/>
-        <h4><?php echo $item['name']?></h4>
-      </a>
-      
-      <?php endforeach?>
-      
-    </div>
-  </div>
-
-</section>
-
-
-<section class="page-section">
-
-  <?php
-  $aboutZapalgoItems = array(
-      array(
-          'name' => 'The movie',
-          'link' => '/zapalgo_video/'
-      ),
-      array(
-          'name' => 'Our story',
-          'link' => '/zapalgo-story-behind-genius/'
-      ),
-      array(
-          'name' => 'Press',
-          'link' => '/press/'
-      ),
-      array(
-          'name' => 'Blog',
-          'link' => '/blog/'
-      ),
-      
-  );
-
-  ?>
-  <div class="title-page">
-    <h1>About Zapalgo</h1>
-  </div>
-  <div class="custom-container homeTiles">	
-    <div class="row">
-      <?php foreach($aboutZapalgoItems as $index => $item):?>
-      <a href="<?php echo $urlPrefix.$item['link']?>" class="col-md-6">
-        <img src="<?php echo get_template_directory_uri(); ?>/img/about<?php echo $index+1?>.jpg"/>
-        <h4><?php echo $item['name']?></h4>
-      </a>
-      <?php endforeach?>
-    </div>
-  </div>
-</section>
-
 
 
 		  					

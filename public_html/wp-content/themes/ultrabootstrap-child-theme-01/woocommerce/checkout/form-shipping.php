@@ -70,21 +70,3 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php endif; ?>
 
 </div>
-
-<script type="text/javascript">
-   $('#ship-to-different-address-checkbox').change(function(){
-     var shippingField = $('#shipping_address_1_field');
-     if($(this).is(':checked')){
-       shippingField.addClass('validate-required');
-     }else{
-       shippingField.removeClass('validate-required');
-     }
-   });
-   $(document).ready(function() {
-     setTimeout(function(){
-       $('#ship-to-different-address-checkbox').change();
-     },300);
-  
-});
-   
-</script>

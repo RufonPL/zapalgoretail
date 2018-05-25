@@ -88,11 +88,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<?php //endif; ?>
 
-            <tr class="shipping">
-				<th>Shipping</th>
-				<td><?php echo WC()->cart->shipping_total . ' '. get_woocommerce_currency_symbol(); ?></td>
-			</tr>
-            
 		<?php foreach ( WC()->cart->get_fees() as $fee ) : ?>
 			<tr class="fee">
 				<th><?php echo esc_html( $fee->name ); ?></th>

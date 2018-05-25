@@ -12,7 +12,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 wc_print_notices();
 do_action( 'woocommerce_before_cart' ); ?>
 
-<!-- kopia -->
 <form action="<?php echo esc_url( WC()->cart->get_cart_url() ); ?>" method="post">
 
 <?php do_action( 'woocommerce_before_cart_table' ); ?>
@@ -113,7 +112,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 		<tr>
 			<td colspan="6" class="actions">
 
-				<?php if (false)/*if ( WC()->cart->coupons_enabled() )*/ { ?>
+				<?php if ( WC()->cart->coupons_enabled() ) { ?>
 					<div class="coupon">
 
 						<label for="coupon_code"><?php _e( 'Coupon', 'woocommerce' ); ?>:</label> <input type="text" name="coupon_code" class="input-text" id="coupon_code" value="" placeholder="<?php _e( 'Coupon code', 'woocommerce' ); ?>" /> <input type="submit" class="button" name="apply_coupon" value="<?php _e( 'Apply Coupon', 'woocommerce' ); ?>" />
@@ -122,12 +121,8 @@ do_action( 'woocommerce_before_cart' ); ?>
 
 					</div>
 				<?php } ?>
-				<input type="submit" class="button cartupdate" name="update_cart" value="<?php _e( 'Update Cart', 'woocommerce' ); ?>">
-				<script>
-				$(document).ready(function(){
-					$('.cartupdate').removeAttr('disabled','disabled');
-				});
-				</script>
+
+				<input type="submit" class="button cartupdate" name="update_cart" value="<?php _e( 'Update Cart', 'woocommerce' ); ?>" />
 				
 				
 				<?php do_action( 'woocommerce_cart_actions' ); ?>
@@ -137,7 +132,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 		</tr>
 
 		<?php do_action( 'woocommerce_after_cart_contents' ); ?>
-	</tbody> 
+	</tbody>
 </table>
 
 <?php do_action( 'woocommerce_after_cart_table' ); ?>
